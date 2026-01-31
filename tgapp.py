@@ -7,11 +7,12 @@ class RootController(TGController):
         return "Hello, World!"
     
     # http://localhost:8080/hello?person=MyName
-    @expose()
-    def hello(self, person):
-        return f"Hello, {person}!"
+    @expose("hello.xhtml")
+    def hello(self, person=None):
+        return dict(person=person)
     
 config = AppConfig(minimal=True, root_controller=RootController())
+config.renderers = ['kajiki']
 application = config.make_wsgi_app()
 
 print("Serving on http://localhost:8080")

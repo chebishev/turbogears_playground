@@ -1,1 +1,2 @@
+kajiki==1.0.2
 TurboGears2==2.5.0
