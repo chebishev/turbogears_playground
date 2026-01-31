@@ -1,5 +1,7 @@
 from tg import expose, TGController, AppConfig
 from wsgiref.simple_server import make_server
+import webhelpers2
+import webhelpers2.text
 
 class RootController(TGController):
     @expose()
@@ -13,6 +15,7 @@ class RootController(TGController):
     
 config = AppConfig(minimal=True, root_controller=RootController())
 config.renderers = ['kajiki']
+config.helpers = webhelpers2
 application = config.make_wsgi_app()
 
 print("Serving on http://localhost:8080")
