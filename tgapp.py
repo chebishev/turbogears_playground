@@ -6,16 +6,18 @@ import webhelpers2.text
 class RootController(TGController):
     @expose()
     def index(self):
-        return "Hello, World!"
+        return 'Hello, World!'
     
     # http://localhost:8080/hello?person=MyName
-    @expose("hello.xhtml")
+    @expose('hello.xhtml')
     def hello(self, person=None):
         return dict(person=person)
     
 config = AppConfig(minimal=True, root_controller=RootController())
 config.renderers = ['kajiki']
-config.helpers = webhelpers2
+config['helpers'] = webhelpers2
+config.serve_static = True
+config.paths['static_files'] = 'public'
 application = config.make_wsgi_app()
 
 print("Serving on http://localhost:8080")
