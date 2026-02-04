@@ -15,7 +15,7 @@ description = ""
 authors = [
   { name = "chebishev", email = "atanas.chebishev@gmail.com" }
 ]
-urls = { Homepage = "http://localhost" }
+urls = { Homepage = "http://127.0.0.1:8080/" }
 readme = { file = "README.rst", content-type = "text/x-rst" }
 dependencies = [
   "TurboGears2 >= 2.5.0",
