@@ -33,7 +33,7 @@ config['model'] = Bunch(
     init_model=init_model
     )
 application = config.make_wsgi_app()
-
-print("Serving on http://localhost:8080")
-httpd = make_server('', 8080, application)
+server_port = 8080
+print(f"Serving on http://localhost:{server_port}")
+httpd = make_server('', server_port, application)
 httpd.serve_forever()
