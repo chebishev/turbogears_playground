@@ -1,2 +1,3 @@
+pip install tg.devtools
 pip install -e .
 gearbox serve --reload --debug

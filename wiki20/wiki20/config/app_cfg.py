@@ -11,6 +11,7 @@ import wiki20
 from wiki20 import model, lib
 
 base_config = FullStackApplicationConfigurator()
+base_config.helpers = 'wiki20.lib.helpers'
 
 # General configuration
 base_config.update_blueprint({

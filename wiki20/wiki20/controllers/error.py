@@ -1,38 +1,19 @@
-# -*- coding: utf-8 -*-
-"""Error controller"""
-from tg import request, expose
-from wiki20.lib.base import BaseController
+from tg.controllers import TGController
+from tg import expose, request
 
-__all__ = ['ErrorController']
+class ErrorController(TGController):
 
+    @expose('json')
+    def error(self, *args, **kwargs):
+        return {
+            'status': 'error',
+            'path': request.path,
+        }
 
-class ErrorController(BaseController):
-    """
-    Generates error documents as and when they are required.
-
-    The ErrorDocuments middleware forwards to ErrorController when error
-    related status codes are returned from the application.
-
-    This behaviour can be altered by changing the parameters to the
-    ErrorDocuments middleware in your config/middleware.py file.
-
-    """
-
-    @expose('wiki20.templates.error')
+    @expose()
     def document(self, *args, **kwargs):
-        """Render the error document"""
-        resp = request.environ.get('tg.original_response')
-        try:
-            # tg.abort exposes the message as .detail in response
-            message = resp.detail
-        except:
-            message = None
+        return 'Not Found'
 
-        if not message:
-            message = ("We're sorry but we weren't able to process "
-                       " this request.")
-
-        values = dict(prefix=request.environ.get('SCRIPT_NAME', ''),
-                      code=request.params.get('code', resp.status_int if resp else 400),
-                      message=request.params.get('message', message))
-        return values
+    @expose()
+    def index(self, *args, **kwargs):
+        return 'An error occurred'
