@@ -38,10 +38,21 @@ class RootController(BaseController):
         tmpl_context.project_name = "wiki20"
 
     @expose('wiki20.templates.page')
-    def index(self, pagename="FrontPage"):
+    def _default(self, pagename="FrontPage"):
         """Handle the front-page."""
         page = DBSession.query(Page).filter_by(pagename=pagename).one()
         return dict(wikipage=page)
+
+    @expose('wiki20.templates.edit')
+    def edit(self, pagename="FrontPage"):
+        page = DBSession.query(Page).filter_by(pagename=pagename).one()
+        return dict(wikipage=page)
+
+    @expose()
+    def save(self, pagename, data):
+        page = DBSession.query(Page).filter_by(pagename=pagename).one()
+        page.data = data
+        redirect('/' + pagename)
 
     @expose('wiki20.templates.about')
     def about(self):
